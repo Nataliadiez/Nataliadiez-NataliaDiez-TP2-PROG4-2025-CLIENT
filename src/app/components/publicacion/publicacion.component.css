@@ -1,0 +1,110 @@
+.publicacion-card {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  box-shadow: 0 0 15px #ff0033a2;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 600px;
+  padding: 10px;
+  font-family: "Orbitron", sans-serif;
+  transition: transform 0.3s ease;
+}
+
+/* Título con glitch rojo + refuerzo turquesa */
+.glitch-titulo {
+  color: #ffffff;
+  text-shadow: 0 0 2px #ff1a1a, 0 0 8px #ff0033, 0 0 5px #00f0ff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  animation: glitch-pulse 2s infinite;
+}
+
+@keyframes glitch-pulse {
+  0%,
+  100% {
+    text-shadow: 1px 0 #ff0033, -1px 0 #00f0ff;
+  }
+  50% {
+    text-shadow: 2px -1px #ff0033, -2px 1px #00f0ff;
+  }
+}
+
+/* Imagen de perfil con borde turquesa */
+.perfil-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #00f0ff;
+}
+
+/* Likes en turquesa */
+.likes {
+  color: #00f0ff;
+  font-weight: bold;
+}
+
+/* Icono de edición con hover cyberpunk */
+.icon-edit {
+  color: #f0ff00;
+  font-size: 25px;
+  transition: color 0.2s ease;
+}
+
+.icon-edit:hover {
+  color: #00f0ff;
+  cursor: pointer;
+}
+
+/* Comentarios */
+.input-comentario {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #00f0ff;
+  color: #fff;
+  font-family: "Orbitron", sans-serif;
+  padding: 5px 10px;
+  outline: none;
+}
+
+.input-comentario::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.input-comentario:focus {
+  border-bottom: 1px solid #f0ff00;
+}
+
+/* Dropdown */
+.dropdown-item {
+  cursor: pointer;
+  color: white;
+}
+
+.dropdown-item:hover {
+  background-color: #00f0ff;
+  color: black;
+  font-weight: bold;
+}
+
+.dropdown-menu {
+  background-color: #1a1a1a;
+  border: solid 1px #f0ff00;
+}
+
+.img-horizontal {
+  object-fit: cover;
+  width: 100%;
+  max-height: 400px;
+}
+
+.img-vertical {
+  object-fit: contain;
+  max-height: 400px;
+  width: auto;
+}
+.img-thumbnail {
+  background-color: #1a1a1a;
+  border: none;
+}

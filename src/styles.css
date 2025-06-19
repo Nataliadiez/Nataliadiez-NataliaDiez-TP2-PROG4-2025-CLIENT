@@ -1,1 +1,124 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --almicida-black: #0a0a0f;
+  --almicida-red: #ff1a1a;
+  --almicida-red-dark: #8b0000;
+  --almicida-glitch: #ff0033;
+  --almicida-gray: #d3d3d3;
+  --almicida-bg-card: #1c1c1c;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-image: url("assets/images/Blackwall2.jpg");
+  background-color: #000000;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  color: var(--almicida-gray);
+  font-family: "Rajdhani", sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+#background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.3) contrast(1.1) saturate(1.2);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+a,
+.btn-link {
+  color: var(--almicida-red);
+}
+
+.btn-primary {
+  background-color: var(--almicida-red);
+  border-color: var(--almicida-red-dark);
+  box-shadow: 0 0 10px var(--almicida-glitch);
+}
+
+.form-control {
+  background-color: #1c1c1c;
+  color: white;
+  border: 1px solid var(--almicida-red-dark);
+}
+
+.form-control:focus {
+  border-color: var(--almicida-red);
+  box-shadow: 0 0 6px var(--almicida-glitch);
+}
+
+/*SWAL*/
+.swal2-popup.almicida-style {
+  background-color: #0a0a0f;
+  color: #d3d3d3;
+  border: 1px solid #ff0033;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px #ff1a1a88;
+  font-family: "Orbitron", sans-serif;
+}
+
+.swal2-title.almicida-style {
+  color: #ff1a1a;
+  font-size: 1.8rem;
+  text-shadow: 0 0 5px #ff0033;
+}
+
+.swal2-html-container {
+  color: #e0e0e0;
+  font-size: 1.1rem;
+}
+
+.swal2-confirm.almicida-style {
+  background-color: #ff1a1a;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px #ff0033;
+  transition: all 0.2s ease-in-out;
+}
+
+.swal2-confirm.almicida-style:hover {
+  background-color: #b30000;
+  box-shadow: 0 0 15px #ff0033;
+}
+
+.swal2-cancel.almicida-style {
+  background-color: transparent;
+  color: #888;
+  border: 1px solid #888;
+  border-radius: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

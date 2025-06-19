@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand-lg custom-navbar px-4 py-3">
+    <div class="container-fluid">
+        <img class="navbar-logo" src="assets/images/icon.png" alt="Ícono Brain">
+        <a class="navbar-brand text-danger glitch-text" href="#">ALMICIDA</a>
+        <div class="navbar-nav ms-auto">
+            @if(estaLogueado()){
+            <a class="nav-link text-light" routerLink="/publicaciones">Publicaciones</a>
+            <a class="nav-link text-light" routerLink="/perfil">Mi Perfil</a>
+            <a class="nav-link text-light" (click)="cerrarSesion()">Cerrar sesión</a>
+            }@else {
+            <a class="nav-link text-light" routerLink="/login">Login</a>
+            <a class="nav-link text-light" routerLink="/registro">Registro</a>
+            }
+        </div>
+    </div>
+</nav>

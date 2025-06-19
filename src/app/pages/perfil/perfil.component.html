@@ -1,0 +1,56 @@
+<div class="container perfil-container text-light">
+    @if(this.modoEdicion() && this.formulario){
+    <div class="perfil-card d-flex mb-5 flex-column">
+        <form action="" [formGroup]="this.formulario">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Foto de perfil</label>
+                <input type="file" class="form-control" (change)="onFileChange($event)" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Nombre de usuario</label>
+                <input type="text" class="form-control glitch-input" formControlName="userName">
+                <small class="text-danger">{{ getError(userName) }}</small>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control glitch-input" formControlName="email">
+                <small class="text-danger">{{ getError(email) }}</small>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Descripción</label>
+                <textarea class="form-control glitch-input" rows="3" formControlName="descripcion"></textarea>
+                <small class="text-danger">{{ getError(descripcion) }}</small>
+            </div>
+            <div class="d-flex gap-5">
+                <button class="btn btn-success mt-3" (click)="enviarFormulario()">Guardar cambios</button>
+                <button class="btn btn-danger mt-3" (click)="limpiarFormulario()">Cancelar</button>
+            </div>
+
+        </form>
+    </div>
+
+    }@else {
+    <div class="perfil-card d-flex mb-5 justify-content-between">
+        <div class=" d-flex justify-content-between gap-5">
+            <img [src]="'http://localhost:3000' + perfil?.imagenPerfil" class="perfil-img" />
+            <div>
+                <h2 class="glitch-titulo">&#64;{{ perfil?.userName }}</h2>
+                <p>{{ perfil?.email }}</p>
+                <p>{{ perfil?.descripcion }}</p>
+            </div>
+        </div>
+        <div>
+            <i class="fa-solid fa-pencil" (click)="editarPerfil()"></i>
+        </div>
+    </div>
+    }
+
+
+    <h4 class="glitch-titulo mb-3 text-center">Últimas publicaciones</h4>
+
+    <div class="publicaciones-grid">
+        @for(publicacion of publicaciones; track $index){
+        <app-publicacion [publicacion]="publicacion" />
+        }
+    </div>
+</div>

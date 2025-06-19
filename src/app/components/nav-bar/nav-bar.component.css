@@ -1,0 +1,62 @@
+.custom-navbar {
+  background-color: #0a0a0f;
+  border-bottom: 1px solid #ff1a1a;
+  box-shadow: 0 0 10px #ff0033;
+  font-family: "Orbitron", sans-serif;
+}
+a {
+  cursor: pointer;
+}
+
+.navbar-brand {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
+
+.navbar-nav .nav-link {
+  position: relative;
+  margin-left: 1.5rem;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link::after {
+  content: "";
+  display: block;
+  width: 0%;
+  height: 2px;
+  background-color: #ff0033;
+  transition: width 0.3s ease-in-out;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ff1a1a;
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+.glitch-text {
+  text-shadow: 0 0 2px #ff1a1a, 0 0 10px #ff0033, 0 0 20px #ff0033;
+}
+
+.custom-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-logo {
+  height: 40px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.navbar {
+  margin-bottom: 50px;
+}

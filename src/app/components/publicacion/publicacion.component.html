@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-center my-4">
+    @if(publicacion()){
+    <div class="card publicacion-card">
+        @if(this.propietario()){
+
+        <div class="dropdown text-end p-1">
+            <i class="fa-solid fa-ellipsis icon-edit" data-bs-toggle="dropdown" aria-expanded="false"></i>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" (click)="onEdit()">Editar</a></li>
+                <li><a class="dropdown-item" (click)="eliminarPublicacion()">Eliminar</a></li>
+            </ul>
+        </div>
+        }
+        <div class="card-header d-flex align-items-center gap-2">
+            <img [src]="'http://localhost:3000' + (publicacion()?.autor?.imagenPerfil || '')" alt="Foto de perfil"
+                class="rounded-circle perfil-img" />
+            <strong class="text-light">&#64;{{ publicacion()?.autor?.userName }}</strong>
+        </div>
+
+        @if (publicacion()?.imagen) {
+        <img [src]="'http://localhost:3000' + publicacion()?.imagen" [ngClass]="imagenClase()" alt="Imagen publicación"
+            class="img-thumbnail" />
+        }
+
+        <div class="card-body">
+            <div class="d-flex align-items-center mb-2">
+                <button class="btn btn-link p-0 me-2" (click)="toggleLike()">
+                    <i class="fa-solid fa-microchip icon"
+                        [class.text-danger]="publicacion()?.likes?.includes(usuarioActualId)"
+                        [class.text-secondary]="!publicacion()?.likes?.includes(usuarioActualId)">
+                    </i>
+                </button>
+                <span class="likes">{{ publicacion()?.likes?.length }} me gusta</span>
+            </div>
+
+            <p class="glitch-titulo">{{ publicacion()?.titulo }}</p>
+            <p class="card-text text-light mb-2">{{ publicacion()?.mensaje }}</p>
+
+            @for (comentario of this.comentarios(); track $index) {
+            <p class="mb-1 text-light">
+                <strong>{{ comentario.usuario.userName }}</strong> {{ comentario.contenido }}
+            </p>
+            }
+
+            @if(hayMasComentarios()) {
+            <button class="btn btn-sm btn-outline-secondary mt-2" (click)="cargarComentarios()">
+                Ver más comentarios
+            </button>
+            }
+            <div class="comentario-input mt-3">
+                <input type="text" class="input-comentario w-100" [(ngModel)]="nuevoComentario"
+                    placeholder="Agregá un comentario" (keyup.enter)="enviarComentario()" />
+            </div>
+        </div>
+    </div>
+    }@else {
+    <h1>Actualmente no hay publicaciones</h1>
+    }
+</div>

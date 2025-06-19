@@ -1,0 +1,155 @@
+.crear-publicacion-card {
+  background-color: #0f0f1a;
+  border: 1px solid #ff1a1a;
+  box-shadow: 0 0 12px #ff0033a8;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  max-width: 600px;
+}
+
+.titulo-input,
+.mensaje-textarea {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  border: 1px solid #00f0ff;
+  font-family: "Orbitron", sans-serif;
+}
+
+.titulo-input::placeholder,
+.mensaje-textarea::placeholder {
+  color: #aaa;
+}
+
+.title {
+  font-family: "Orbitron", sans-serif;
+  color: #00f0ff;
+  text-shadow: 0 0 8px #00f0ff;
+}
+
+.contenedor-publicaciones {
+  max-width: 100vw;
+}
+
+/* Dropdown */
+.dropdown-item {
+  cursor: pointer;
+  color: white;
+}
+
+.dropdown-item:hover {
+  background-color: #00f0ff;
+  color: #000;
+  font-weight: bold;
+}
+
+.dropdown-menu {
+  background-color: #1a1a1a;
+  border: solid 1px #f0ff00;
+}
+
+/* Botón subir */
+.boton-volver-arriba {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  border-radius: 50%;
+  padding: 10px 15px;
+  font-size: 20px;
+  box-shadow: 0 0 10px #ff0040;
+  background-color: #ff0040;
+  color: black;
+  border: 2px solid #000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.boton-volver-arriba:hover {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* Contenedor de filtros */
+.filtros-publicaciones {
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Botones base con estética cyberpunk */
+.boton-filtro {
+  font-family: "Orbitron", sans-serif;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 8px 16px;
+  transition: all 0.3s ease-in-out;
+  border: 2px solid #00f0ff;
+  background-color: transparent;
+  color: #00f0ff;
+  box-shadow: 0 0 10px #00f0ff88;
+}
+
+.boton-filtro:hover {
+  background-color: #00f0ff;
+  color: #000;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00f0ff;
+}
+
+/* Botón alternativo en amarillo */
+.boton-filtro-amarillo {
+  border-color: #f0ff00;
+  color: #f0ff00;
+  box-shadow: 0 0 10px #f0ff0088;
+}
+
+.boton-filtro-amarillo:hover {
+  background-color: #f0ff00;
+  color: #000;
+  box-shadow: 0 0 15px #f0ff00;
+}
+
+/* Dropdown personalizado */
+.dropdown .btn-secondary {
+  background-color: transparent;
+  border: 2px solid #ff0033;
+  color: #ff0033;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bold;
+  box-shadow: 0 0 10px #ff003388;
+}
+
+.dropdown .btn-secondary:hover {
+  background-color: #ff0033;
+  color: #000;
+  box-shadow: 0 0 15px #ff0033;
+}
+
+.dropdown-menu {
+  background-color: #0f0f1a;
+  border: 2px solid #ff0033;
+}
+
+.dropdown-item {
+  color: #f0f0f0;
+  font-family: "Orbitron", sans-serif;
+  transition: background 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: #00f0ff;
+  color: #000;
+  font-weight: bold;
+}
+
+.img-horizontal {
+  object-fit: cover;
+  width: 100%;
+  max-height: 400px;
+}
+
+.img-vertical {
+  object-fit: contain;
+  max-height: 400px;
+  width: auto;
+}

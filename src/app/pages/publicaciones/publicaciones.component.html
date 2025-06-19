@@ -1,0 +1,107 @@
+<div class="d-flex flex-column align-content-center justify-content-center m-auto p-2 contenedor-publicaciones">
+    <h1 class="text-center title">Hello chooms!</h1>
+    @if(this.formulario){
+    <div class="card crear-publicacion-card mb-4 d-flex align-content-center m-auto justify-content-center w-100">
+        <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
+            <div class="mb-3">
+                <input type="text" class="form-control titulo-input" placeholder="¿En qué estás pensando?"
+                    formControlName="titulo" />
+            </div>
+
+            <div class="mb-3">
+                <textarea class="form-control mensaje-textarea" placeholder="Agregá más detalles..." rows="3"
+                    formControlName="mensaje"></textarea>
+            </div>
+
+            <div class="mb-3 d-flex align-items-center justify-content-between flex-column gap-3">
+                <label for="imagen" class="btn btn-outline-light d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> Agregar imagen
+                </label>
+                <input type="file" id="imagen" hidden (change)="onFileChange($event)" />
+                @if(imagenPreview()){
+                <img [src]="imagenPreview()" [ngClass]="imagenClase()" class="img-thumbnail" width="200" />
+                }
+
+
+                @if(this.imagenPublicacion){
+                <span class="text-light small">{{this.imagenPublicacion.name}}</span>
+                }
+            </div>
+
+
+            @if(this.modoEdicion() && this.imagenActual()){
+            <div class="text-center mb-3">
+                <p class="text-light mb-1">Imagen actual:</p>
+                <img [src]="'http://localhost:3000' + imagenActual()" class="img-thumbnail" width="200" />
+            </div>
+
+            <div class="d-flex justify-content-between gap-5">
+                <button type="submit" class="btn btn-danger w-100" [disabled]="!formulario.valid">
+                    Editar
+                </button>
+                <button type="submit" class="btn btn-danger w-100" (click)="resetFormulario()">
+                    Cancelar
+                </button>
+            </div>
+            }@else {
+            <div class="d-flex justify-content-between gap-5">
+                <button type="submit" class="btn btn-danger w-100" [disabled]="!formulario.valid">
+                    Publicar
+                </button>
+                <button type="submit" class="btn btn-danger w-100" (click)="resetFormulario()">
+                    Cancelar
+                </button>
+            </div>
+            }
+
+
+
+        </form>
+    </div>
+
+    <div class="filtros-publicaciones m-auto">
+        <button class="boton-filtro boton-filtro-amarillo" (click)="ordenarPorLikes()">
+            <i class="fa-solid fa-fire"></i> Más populares
+        </button>
+        <button class="boton-filtro" (click)="ordenarPorRecientes()">
+            <i class="fa-solid fa-clock"></i> Más recientes
+        </button>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fa-solid fa-user"></i> Filtrar por usuario
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item" (click)="quitarFiltroUsuario()">Ver todos</a>
+                </li>
+                @for(usuario of this.listadoUsuarios(); track $index){
+                <li>
+                    <a class="dropdown-item" (click)="filtrarPorUsuario(usuario._id)">
+                        {{ usuario.userName }}
+                    </a>
+                </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    @for(publicacion of this.publicaciones(); track $index){
+    <app-publicacion [publicacion]="publicacion" (publicacionAeditar)="editarPublicacion($event)">
+    </app-publicacion>
+    }
+    }
+    <div class="text-center mt-4">
+        <button class="btn btn-outline-light" (click)="cargarPublicaciones()" [disabled]="cargando()">
+            Cargar más
+        </button>
+    </div>
+
+    @if (mostrarBotonArriba()) {
+    <button class="btn btn-danger boton-volver-arriba" (click)="volverArriba()" title="Volver arriba">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+    }
+
+</div>

@@ -1,0 +1,119 @@
+.container-sm {
+  background-color: #0a0a0f;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 25px #ff0033a8;
+  color: #e0e0e0;
+  max-width: 700px;
+}
+
+h3 {
+  font-family: "Orbitron", sans-serif;
+  color: #ff1a1a;
+  text-shadow: 0 0 6px #ff0033;
+}
+
+label {
+  font-weight: 600;
+  color: #ff1a1a;
+  text-shadow: 0 0 4px #ff0033;
+}
+
+.form-control {
+  background-color: #1c1c1c;
+  color: #ffffff;
+  border: 1px solid #8b0000;
+  border-radius: 0.5rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: #ff1a1a;
+  box-shadow: 0 0 10px #ff0033;
+}
+
+small.text-danger {
+  color: #ff5555;
+  font-size: 0.85rem;
+  text-shadow: 0 0 3px #ff1a1a;
+}
+
+.btn-primary {
+  background-color: #ff1a1a;
+  border-color: #8b0000;
+  box-shadow: 0 0 10px #ff0033;
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background-color: #cc0000;
+  box-shadow: 0 0 15px #ff0033;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid #666;
+  color: #aaa;
+  transition: 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #1c1c1c;
+  color: #fff;
+  border-color: #ff1a1a;
+  box-shadow: 0 0 10px #ff0033;
+}
+
+/* ERRORES INPUT */
+input.ng-valid.ng-touched {
+  border-color: #00ff88 !important;
+  box-shadow: 0 0 8px #00ff88 !important;
+}
+
+input.ng-invalid.ng-touched {
+  border-color: #ff0033 !important;
+  box-shadow: 0 0 10px #ff0033 !important;
+}
+
+/* -------- EFECTO GLITCH EN INPUT -------- */
+.glitch-input {
+  position: relative;
+  background-color: #1c1c1c;
+  color: #ffffff;
+  border: 1px solid #8b0000;
+  border-radius: 0.5rem;
+  font-family: "Orbitron", sans-serif;
+  transition: all 0.3s ease;
+}
+
+.glitch-input:focus {
+  border-color: #ff1a1a;
+  box-shadow: 0 0 12px #ff0033, 0 0 4px #ff0033 inset;
+  animation: glitch 1s infinite steps(2, end);
+  outline: none;
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: 1px 0 red, -1px 0 cyan;
+  }
+  20% {
+    text-shadow: -2px 0 red, 2px 0 cyan;
+  }
+  40% {
+    text-shadow: 2px 0 red, -2px 0 cyan;
+  }
+  60% {
+    text-shadow: -1px 0 red, 1px 0 cyan;
+  }
+  80% {
+    text-shadow: 2px 0 red, -1px 0 cyan;
+  }
+  100% {
+    text-shadow: 0 0 red, 0 0 cyan;
+  }
+}
+
+label:hover {
+  animation: glitch 1s infinite steps(2, end);
+}

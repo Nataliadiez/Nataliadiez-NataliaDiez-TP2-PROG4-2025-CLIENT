@@ -73,7 +73,7 @@ export class RegistroComponent implements OnInit {
     if (
       this.formulario.value.password !== this.formulario.value.confirmPassword
     ) {
-      mostrarSwal('Error', 'Las contraseñas no coinciden.', 'error');
+      mostrarSwal(`Error!`, 'Las contraseñas no coinciden.', 'error');
       return;
     }
 
@@ -100,11 +100,12 @@ export class RegistroComponent implements OnInit {
           this.router.navigate(['publicaciones']);
         }, 2000);
       },
-      error: (err) => {
-        console.error('Error en registro', err);
+      error: (error) => {
+        console.error('Error en registro', error);
         mostrarSwal(
-          `Error!`,
-          err.error?.message || 'Ha ocurrido un error al registrar el usuario',
+          `Error ${error.error.statusCode}!`,
+          error.error?.message ||
+            'Ha ocurrido un error al registrar el usuario',
           'error'
         );
       },

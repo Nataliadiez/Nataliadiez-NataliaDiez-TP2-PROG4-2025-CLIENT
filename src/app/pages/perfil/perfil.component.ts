@@ -54,7 +54,12 @@ export class PerfilComponent implements OnInit {
         this.perfil = res.usuario;
         this.publicaciones = res.publicaciones;
       },
-      error: (err) => console.error('Error al traer perfil', err),
+      error: (error) =>
+        mostrarSwal(
+          `Error ${error.error.statusCode}!`,
+          error.error?.message || 'Error al traer el perfil',
+          'error'
+        ),
     });
   }
 
@@ -93,10 +98,10 @@ export class PerfilComponent implements OnInit {
         this.modoEdicion.set(false);
         this.perfil = res.usuario;
       },
-      error: (err) => {
+      error: (error) => {
         mostrarSwal(
-          'Error!',
-          err.error?.message || 'Ocurrió un error al actualizar el perfil',
+          `Error ${error.error.statusCode}!`,
+          error.error?.message || 'Ocurrió un error al actualizar el perfil',
           'error'
         );
       },

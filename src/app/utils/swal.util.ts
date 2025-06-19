@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 export function mostrarSwal(
   titulo: string,
   mensaje: string,
-  tipo: 'success' | 'error' | 'warning' = 'success'
+  tipo: 'info' | 'success' | 'error' | 'warning' = 'success'
 ) {
   Swal.fire({
     icon: tipo,
@@ -49,4 +49,3 @@ export function swalConOpciones(
     return undefined;
   });
 }
-

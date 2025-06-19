@@ -12,12 +12,17 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
   authService = inject(AuthService);
   estaLogueado = signal<boolean>(false);
+  esAdmin = signal<boolean>(false);
 
   constructor(private router: Router) {}
 
   ngOnInit() {
     this.authService.usuarioLogueado$.subscribe((estado) => {
       this.estaLogueado.set(estado);
+    });
+
+    this.authService.usuarioAdmin$.subscribe((perfil) => {
+      this.esAdmin.set(perfil);
     });
   }
 

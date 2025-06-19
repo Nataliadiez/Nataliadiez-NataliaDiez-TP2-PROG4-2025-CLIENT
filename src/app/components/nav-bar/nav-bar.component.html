@@ -6,6 +6,9 @@
             @if(estaLogueado()){
             <a class="nav-link text-light" routerLink="/publicaciones">Publicaciones</a>
             <a class="nav-link text-light" routerLink="/perfil">Mi Perfil</a>
+            @if(esAdmin()){
+            <a class="nav-link text-light" routerLink="/dashboard">PanelAdmin</a>
+            }
             <a class="nav-link text-light" (click)="cerrarSesion()">Cerrar sesión</a>
             }@else {
             <a class="nav-link text-light" routerLink="/login">Login</a>

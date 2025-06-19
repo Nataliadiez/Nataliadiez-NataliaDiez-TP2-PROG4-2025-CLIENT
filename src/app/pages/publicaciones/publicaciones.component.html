@@ -53,12 +53,10 @@
                 </button>
             </div>
             }
-
-
-
         </form>
     </div>
 
+    @if(this.publicaciones().length !== 0){
     <div class="filtros-publicaciones m-auto">
         <button class="boton-filtro boton-filtro-amarillo" (click)="ordenarPorLikes()">
             <i class="fa-solid fa-fire"></i> Más populares
@@ -86,17 +84,22 @@
             </ul>
         </div>
     </div>
+    }
 
     @for(publicacion of this.publicaciones(); track $index){
     <app-publicacion [publicacion]="publicacion" (publicacionAeditar)="editarPublicacion($event)">
     </app-publicacion>
     }
     }
+    @if(this.publicaciones().length > this.tamanoPagina){
     <div class="text-center mt-4">
         <button class="btn btn-outline-light" (click)="cargarPublicaciones()" [disabled]="cargando()">
             Cargar más
         </button>
     </div>
+    }@if(this.publicaciones().length === 0) {
+    <h1 class="text-center m-5 title">Actualmente no hay publicaciones</h1>
+    }
 
     @if (mostrarBotonArriba()) {
     <button class="btn btn-danger boton-volver-arriba" (click)="volverArriba()" title="Volver arriba">

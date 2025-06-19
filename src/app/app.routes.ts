@@ -1,7 +1,13 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
+import { adminGuardGuard } from './guards/admin-guard.guard';
+import { PantallaCargandoComponent } from './components/pantalla-cargando/pantalla-cargando.component';
 
 export const routes: Routes = [
+  {
+    path: '',
+    component: PantallaCargandoComponent,
+  },
   {
     path: 'login',
     loadComponent: () =>
@@ -30,6 +36,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/perfil/perfil.component').then(
         (modulo) => modulo.PerfilComponent
+      ),
+  },
+  {
+    path: 'dashboard',
+    canActivate: [adminGuardGuard],
+    loadComponent: () =>
+      import('./pages/dashboard/dashboard.component').then(
+        (modulo) => modulo.DashboardComponent
       ),
   },
   { path: '**', redirectTo: 'login' },

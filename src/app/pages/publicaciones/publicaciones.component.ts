@@ -54,11 +54,11 @@ export class PublicacionesComponent implements OnInit {
     this.formulario = new FormGroup({
       titulo: new FormControl('', [
         Validators.required,
-        Validators.maxLength(15),
+        Validators.maxLength(50),
       ]),
       mensaje: new FormControl('', [
         Validators.required,
-        Validators.maxLength(100),
+        Validators.maxLength(150),
       ]),
     });
 
@@ -84,7 +84,11 @@ export class PublicacionesComponent implements OnInit {
         this.listadoUsuarios.set(res);
       },
       error: (error) => {
-        console.error('No se pudieron traer los usuarios: ', error);
+        mostrarSwal(
+          `Error ${error.error.statusCode}!`,
+          error.error?.message || 'No se pudieron traer los usuarios',
+          'error'
+        );
       },
     });
 
@@ -143,7 +147,7 @@ export class PublicacionesComponent implements OnInit {
               error.error?.message
             );
             mostrarSwal(
-              'Error',
+              `Error ${error.error.statusCode} !`,
               error.error?.message || 'No se pudo editar la publicación',
               'error'
             );
@@ -155,11 +159,10 @@ export class PublicacionesComponent implements OnInit {
           mostrarSwal(`Publicación creada exitosamente!`, '', 'success');
           this.cargarPublicaciones();
         },
-        error: (err) => {
-          console.error('Error al crear la publicación', err);
+        error: (error) => {
           mostrarSwal(
-            `Error!`,
-            err.error?.message ||
+            `Error ${error.error.statusCode}!`,
+            error.error?.message ||
               'Ha ocurrido un error al crear la publicación',
             'error'
           );
@@ -169,6 +172,7 @@ export class PublicacionesComponent implements OnInit {
 
     this.resetFormulario();
     this.imagenPublicacion = null;
+    this.imagenPreview.set(null);
   }
 
   get titulo() {

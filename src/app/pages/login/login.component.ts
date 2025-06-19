@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
       next: (res) => {
         mostrarSwal(
           `Bienvenido, ${res.usuario.nombre}!`,
-          `Inicio de sesión exitoso`,
+          `Inicio de sesión exitoso, perfil: ${res.usuario.perfil}`,
           'success'
         );
         this.authService.guardarToken(res.token);
@@ -53,10 +53,10 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['publicaciones']);
         }, 2000);
       },
-      error: (err) => {
+      error: (error) => {
         mostrarSwal(
-          `Error!`,
-          err.error?.message || 'Ha ocurrido un error al iniciar sesión',
+          `Error ${error.error.statusCode}!`,
+          error.error?.message || 'Ha ocurrido un error al iniciar sesión',
           'error'
         );
       },
@@ -84,9 +84,11 @@ export class LoginComponent implements OnInit {
   }
 
   inicioRapido() {
-    if (this.formulario) {
-      this.formulario.value.identificador = 'Natt10';
-      this.formulario.value.password = 'Natt123456!';
-    }
+    this.formulario?.patchValue({
+      identificador: 'Natt10',
+      password: 'Natt2025',
+    });
+
+    this.enviarFormulario();
   }
 }

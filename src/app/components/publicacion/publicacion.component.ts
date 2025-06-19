@@ -7,6 +7,7 @@ import {
   signal,
   computed,
   inject,
+  effect,
 } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -88,9 +89,12 @@ export class PublicacionComponent implements OnInit {
             this.hayMasComentarios.set(false);
           }
         },
-        error: (err) => {
-          console.error('Error al cargar comentarios:', err);
-          mostrarSwal('Error', 'No se pudieron traer los comentarios', 'error');
+        error: (error) => {
+          console.error(
+            'Error al cargar comentarios:',
+            error.error.message,
+            error.error.statusCode
+          );
         },
       });
   }
@@ -100,8 +104,12 @@ export class PublicacionComponent implements OnInit {
       next: (res) => {
         this.publicacion()!.likes = res.likes;
       },
-      error: (err) => {
-        console.error('Error al dar like:', err);
+      error: (error) => {
+        console.error(
+          'Error al dar like:',
+          error.error.message,
+          error.error.statusCode
+        );
       },
     });
   }
@@ -116,8 +124,12 @@ export class PublicacionComponent implements OnInit {
         next: () => {
           this.nuevoComentario = '';
         },
-        error: (err) => {
-          console.error('Error al enviar comentario:', err);
+        error: (error) => {
+          console.error(
+            'Error al enviar comentario:',
+            error.error.message,
+            error.error.statusCode
+          );
         },
       });
   }
@@ -140,7 +152,12 @@ export class PublicacionComponent implements OnInit {
           .borrarPublicacion(this.publicacion()!._id)
           .subscribe({
             next: () => mostrarSwal('Publicación eliminada', '', 'success'),
-            error: (err) => mostrarSwal('Error', err.message, 'error'),
+            error: (error) =>
+              mostrarSwal(
+                `Error ${error.error.statusCode}!`,
+                error.error.message,
+                'error'
+              ),
           });
       } else {
         mostrarSwal('No se eliminó la publicación', '', 'error');

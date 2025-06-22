@@ -1,0 +1,24 @@
+@if(usuarioSeleccionado()){
+<table class="table-cyberpunk">
+    <tr>
+        <th>Nombre</th>
+        <td>{{ usuarioSeleccionado()?.nombre }}</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>{{ usuarioSeleccionado()?.email }}</td>
+    </tr>
+    <tr>
+        <th>UserName</th>
+        <td>{{ usuarioSeleccionado()?.userName }}</td>
+    </tr>
+    <tr>
+        <th>Perfil</th>
+        <td>{{ usuarioSeleccionado()?.perfil }}</td>
+    </tr>
+    <tr>
+        <th>Estado</th>
+        <td>{{ usuarioSeleccionado()?.estado ? 'Activo' : 'Inactivo' }}</td>
+    </tr>
+</table>
+}

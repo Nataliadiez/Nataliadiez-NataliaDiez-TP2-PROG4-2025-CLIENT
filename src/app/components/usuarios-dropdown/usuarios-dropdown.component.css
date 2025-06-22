@@ -1,0 +1,36 @@
+/* Dropdown */
+.drop-button {
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #1a1a1a;
+  color: #f0ff00;
+  border: 1px solid #f0ff00;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.drop-button:hover {
+  background-color: #00f0ff;
+  color: black;
+}
+
+.dropdown-menu {
+  background-color: #1a1a1a;
+  border: solid 1px #f0ff00;
+  color: white !important;
+}
+
+.dropdown-item {
+  color: white;
+  padding: 8px 16px;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #00f0ff;
+  color: black;
+  font-weight: bold;
+}
+
+

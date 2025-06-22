@@ -1,10 +1,19 @@
 /* From Uiverse.io by andrew-demchenk0 */
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
 .glitch {
   position: relative;
-  font-size: 25px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 5.5rem;
   font-weight: 700;
   line-height: 1.2;
-  color: #fff;
+  color: hsl(0, 0%, 100%);
   letter-spacing: 5px;
   z-index: 1;
   animation: shift 1s ease-in-out infinite alternate;

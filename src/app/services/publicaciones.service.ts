@@ -31,10 +31,11 @@ export class PublicacionesService {
     });
   }
 
-  borrarPublicacion(publicacionId: string): Observable<any> {
+  borrarPublicacion(publicacionId: string, esAdmin: boolean): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${publicacionId}`, {
       headers: {
         Authorization: `Bearer ${this.authService.obtenerToken()}`,
+        'x-admin': String(esAdmin),
       },
     });
   }

@@ -43,9 +43,12 @@ export class PublicacionComponent implements OnInit {
   usuarioActualId = '';
   nuevoComentario = '';
 
-  propietario = computed(
-    () => this.usuarioActualId === this.publicacion()?.autor?._id
-  );
+  puedeEditar = computed(() => {
+    return (
+      this.usuarioActualId === this.publicacion()?.autor?._id ||
+      this.authService.esUsuarioAdmin()
+    );
+  });
 
   ngOnInit() {
     this.usuarioActualId = this.authService.obtenerIdUsuario();
@@ -135,7 +138,7 @@ export class PublicacionComponent implements OnInit {
   }
 
   onEdit() {
-    if (this.propietario()) {
+    if (this.puedeEditar()) {
       this.publicacionAeditar.emit(this.publicacion()!);
     }
   }
@@ -149,7 +152,10 @@ export class PublicacionComponent implements OnInit {
     ).then((respuesta) => {
       if (respuesta === 'si') {
         this.publicacionService
-          .borrarPublicacion(this.publicacion()!._id)
+          .borrarPublicacion(
+            this.publicacion()!._id,
+            this.authService.esUsuarioAdmin()
+          )
           .subscribe({
             next: () => mostrarSwal('Publicación eliminada', '', 'success'),
             error: (error) =>

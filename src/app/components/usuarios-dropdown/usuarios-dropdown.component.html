@@ -1,0 +1,10 @@
+<div class="dropdown text-center p-1">
+    <button class="drop-button" data-bs-toggle="dropdown" aria-expanded="false">Usuarios</button>
+    <ul class="dropdown-menu">
+        @if(this.usuarios.length !== 0){
+        @for(usuario of this.usuarios; track $index){
+        <li><a class="dropdown-item" (click)="seleccionarUsuario(usuario._id)">{{usuario.userName}}</a></li>
+        }
+        }
+    </ul>
+</div>

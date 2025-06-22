@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center my-4">
     @if(publicacion()){
     <div class="card publicacion-card">
-        @if(this.propietario()){
+        @if(this.puedeEditar()){
 
         <div class="dropdown text-end p-1">
             <i class="fa-solid fa-ellipsis icon-edit" data-bs-toggle="dropdown" aria-expanded="false"></i>

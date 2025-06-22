@@ -34,6 +34,11 @@ body {
   min-height: 100vh;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 #background-video {
   position: fixed;
   top: 0;
@@ -112,13 +117,4 @@ a,
   border: 1px solid #888;
   border-radius: 0.5rem;
   margin-left: 0.5rem;
-}
-
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

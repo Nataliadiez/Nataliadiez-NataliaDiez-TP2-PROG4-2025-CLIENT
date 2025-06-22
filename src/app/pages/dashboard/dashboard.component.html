@@ -1,1 +1,8 @@
-<p>dashboard works!</p>
+<h1 class="text-center title">Panel del admin</h1>
+
+<div class="text-center">
+    <app-usuarios-dropdown (usuarioSeleccionado)="recibirUsuario($event)"></app-usuarios-dropdown>
+    <app-tabla-usuarios [usuarioSeleccionado]="this.usuarioSeleccionado()"></app-tabla-usuarios>
+    <app-formulario-registro [usuarioAeditar]="this.usuarioAeditar()"></app-formulario-registro>
+    <app-graficos></app-graficos>
+</div>

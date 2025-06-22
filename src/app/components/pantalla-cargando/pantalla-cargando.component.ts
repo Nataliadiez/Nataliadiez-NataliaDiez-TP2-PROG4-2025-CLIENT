@@ -17,7 +17,7 @@ export class PantallaCargandoComponent {
     this.authService.verificarToken().subscribe({
       next: (res) => {
         const duracion = Date.now() - inicio;
-        const delayRestante = Math.max(3500 - duracion, 0);
+        const delayRestante = Math.max(2500 - duracion, 0);
 
         setTimeout(() => {
           if (res?.autorizado) {

@@ -8,6 +8,7 @@ import {
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { jwtDecode } from 'jwt-decode';
+import { mostrarSwal } from '../utils/swal.util';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ export class AuthGuard implements CanActivate {
   canActivate(): boolean {
     const token = this.authService.obtenerToken();
     if (!token) {
+      this.authService.cerrarSesion();
       this.router.navigate(['login']);
       return false;
     }
@@ -31,7 +33,9 @@ export class AuthGuard implements CanActivate {
         return false;
       }
     } catch (error) {
-      console.error(error);
+      console.error('Token inválido', error);
+      mostrarSwal('Error!', 'Token inválido', 'error');
+      this.authService.cerrarSesion();
       this.router.navigate(['login']);
       return false;
     }

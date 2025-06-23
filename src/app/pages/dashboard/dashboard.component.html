@@ -3,6 +3,16 @@
 <div class="text-center">
     <app-usuarios-dropdown (usuarioSeleccionado)="recibirUsuario($event)"></app-usuarios-dropdown>
     <app-tabla-usuarios [usuarioSeleccionado]="this.usuarioSeleccionado()"></app-tabla-usuarios>
-    <app-formulario-registro [usuarioAeditar]="this.usuarioAeditar()"></app-formulario-registro>
+
+    @if(this.crearUsuario()!){
+    <button class="drop-button" (click)="decidirCrearUnUsuario()">Crear un usuario admin</button>
+
+    }@else {
+    <button class="drop-button" (click)="decidirCrearUnUsuario()">Cerrar formulario</button>
+    <app-formulario-registro [usuarioAeditar]="this.usuarioAeditar()"
+        [submitFn]="registrarAdmin.bind(this)"></app-formulario-registro>
+    }
+
+
     <app-graficos></app-graficos>
 </div>

@@ -17,4 +17,16 @@ export class UsuariosService {
       },
     });
   }
+
+  crearUsuarioAdmin(formData: FormData): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/auth/registroAdmin`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${this.authService.obtenerToken()}`,
+        },
+      }
+    );
+  }
 }

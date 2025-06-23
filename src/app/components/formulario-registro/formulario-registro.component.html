@@ -1,1 +1,74 @@
-<p>formulario-registro works!</p>
+
+
+<div class="container-sm">
+    <h3 class="mb-4">Registro de usuarios admin</h3>
+    @if(this.formulario){
+    <form action="" [formGroup]="this.formulario">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control glitch-input" formControlName="nombre">
+                <small class="text-danger">{{ getError(nombre) }}</small>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Apellido</label>
+                <input type="text" class="form-control glitch-input" formControlName="apellido">
+                <small class="text-danger">{{ getError(apellido) }}</small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Nombre de usuario</label>
+                <input type="text" class="form-control glitch-input" formControlName="userName">
+                <small class="text-danger">{{ getError(userName) }}</small>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control glitch-input" formControlName="email">
+                <small class="text-danger">{{ getError(email) }}</small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Fecha de nacimiento</label>
+                <input type="date" class="form-control glitch-input" formControlName="fechaNacimiento">
+                <small class="text-danger">{{ getError(fechaNacimiento) }}</small>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Foto de perfil</label>
+                <input type="file" class="form-control" (change)="onFileChange($event)" />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <textarea class="form-control glitch-input" rows="3" formControlName="descripcion"></textarea>
+            <small class="text-danger">{{ getError(descripcion) }}</small>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Contraseña</label>
+                <input type="password" class="form-control glitch-input" formControlName="password">
+                <small class="text-danger">{{ getError(password) }}</small>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Repetir contraseña</label>
+                <input type="password" class="form-control glitch-input" formControlName="confirmPassword">
+                <small class="text-danger">
+                    {{ (confirmPassword?.touched && password?.value !== confirmPassword?.value)
+                    ? 'Las contraseñas no coinciden.' : '' }}
+                </small>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-primary me-2" (click)="enviarFormulario()"
+                [disabled]="!this.formulario.valid">Enviar</button>
+            <button class="btn btn-secondary" (click)="limpiarFormulario()">Limpiar</button>
+        </div>
+    </form>
+    }
+</div>

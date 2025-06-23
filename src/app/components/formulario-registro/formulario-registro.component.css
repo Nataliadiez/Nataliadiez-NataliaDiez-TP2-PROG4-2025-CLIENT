@@ -1,0 +1,77 @@
+.container-sm {
+  background-color: #111;
+  border: 1px solid #00f0ff;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 0 15px #00f0ff55;
+  max-width: 800px;
+  margin-top: 20px;
+}
+
+h3 {
+  color: #00f0ff;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 0 0 5px #00f0ff;
+}
+
+label.form-label {
+  color: #fcee0a;
+  text-shadow: 0 0 3px #fcee0a;
+}
+
+input,
+textarea {
+  background-color: #1a1a1a;
+  border: 1px solid #00f0ff;
+  color: #00f0ff !important;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 0 5px transparent;
+  caret-color: #fcee0a;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #fcee0a;
+  outline: none;
+  box-shadow: 0 0 10px #fcee0a;
+  background-color: #222;
+}
+
+input[type="file"] {
+  border: none;
+  color: white;
+}
+
+small.text-danger {
+  color: #fcee0a;
+  font-weight: bold;
+  font-size: 0.75rem;
+}
+
+button.btn-primary {
+  background-color: #00f0ff;
+  border: none;
+  color: black;
+  font-weight: bold;
+  box-shadow: 0 0 10px #00f0ff;
+}
+
+button.btn-primary:hover {
+  background-color: #00c3ff;
+  box-shadow: 0 0 15px #00f0ff, 0 0 25px #00c3ff;
+}
+
+button.btn-secondary {
+  background-color: #fcee0a;
+  border: none;
+  font-weight: bold;
+  color: black;
+  box-shadow: 0 0 10px #fcee0a;
+}
+
+button.btn-secondary:hover {
+  background-color: #e6d600;
+  box-shadow: 0 0 15px #fcee0a, 0 0 25px #e6d600;
+}

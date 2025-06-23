@@ -1,3 +1,14 @@
 .title {
   font-family: "Orbitron", sans-serif;
 }
+
+.drop-button {
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #1a1a1a;
+  color: #f0ff00;
+  border: 1px solid #f0ff00;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}

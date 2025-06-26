@@ -54,7 +54,27 @@ export class PublicacionesService {
       params.set('autorId', autorId);
     }
 
-    return this.http.get(`${this.apiUrl}?${params.toString()}`);
+    return this.http.get(`${this.apiUrl}?${params.toString()}`, {
+      headers: {
+        Authorization: `Bearer ${this.authService.obtenerToken()}`,
+      },
+    });
+  }
+
+  traerPublicacionesInactivas() {
+    return this.http.get(`${environment.apiUrl}/publicaciones/inactivas`, {
+      headers: {
+        Authorization: `Beares ${this.authService.obtenerToken()}`,
+      },
+    });
+  }
+
+  traerPublicacionesInactivasPorUsuario(usuarioId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/inactivas/${usuarioId}`, {
+      headers: {
+        Authorization: `Bearer ${this.authService.obtenerToken()}`,
+      },
+    });
   }
 
   darLike(publicacionId: string): Observable<any> {

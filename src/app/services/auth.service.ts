@@ -198,4 +198,11 @@ export class AuthService {
       },
     });
   }
+
+  iniciarVigilanciaToken(): void {
+    const token = this.obtenerToken();
+    if (token) {
+      this.validarExpiracionToken(token);
+    }
+  }
 }

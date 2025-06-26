@@ -56,7 +56,7 @@
         </form>
     </div>
 
-    @if(this.publicaciones().length !== 0){
+
     <div class="filtros-publicaciones m-auto">
         <button class="boton-filtro boton-filtro-amarillo" (click)="ordenarPorLikes()">
             <i class="fa-solid fa-fire"></i> Más populares
@@ -84,7 +84,7 @@
             </ul>
         </div>
     </div>
-    }
+
 
     @for(publicacion of this.publicaciones(); track $index){
     <app-publicacion [publicacion]="publicacion" (publicacionAeditar)="editarPublicacion($event)">

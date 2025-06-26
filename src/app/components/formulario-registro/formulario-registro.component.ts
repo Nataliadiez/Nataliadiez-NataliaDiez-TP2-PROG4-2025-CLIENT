@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
   templateUrl: './formulario-registro.component.html',
   styleUrl: './formulario-registro.component.css',
 })
-export class FormularioRegistroComponent {
+export class FormularioRegistroComponent implements OnInit {
   usuarioAeditar = input<Usuario | null>();
   formulario?: FormGroup;
   imagenPerfilFile: File | null = null;

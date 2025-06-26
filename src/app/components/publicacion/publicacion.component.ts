@@ -1,3 +1,4 @@
+import { PublicacionesInactivasComponent } from './../publicaciones-inactivas/publicaciones-inactivas.component';
 import {
   Component,
   OnInit,
@@ -30,6 +31,7 @@ export class PublicacionComponent implements OnInit {
     null
   );
   publicacionAeditar = output<Publicacion>();
+  publicacionAreactivar = output<Publicacion>();
 
   authService = inject(AuthService);
   publicacionService = inject(PublicacionesService);
@@ -141,6 +143,29 @@ export class PublicacionComponent implements OnInit {
     if (this.puedeEditar()) {
       this.publicacionAeditar.emit(this.publicacion()!);
     }
+  }
+
+  reactivarPublicacion() {
+    const formData = new FormData();
+    formData.append('titulo', this.publicacion()!.titulo);
+    formData.append('mensaje', this.publicacion()!.mensaje);
+    formData.append('estado', 'true');
+
+    this.publicacionService
+      .editarPublicacion(formData, this.publicacion()!._id)
+      .subscribe({
+        next: () => {
+          mostrarSwal('¡Publicación reactivada!', '', 'success');
+          this.publicacionAreactivar.emit(this.publicacion()!);
+        },
+        error: (err) => {
+          mostrarSwal(
+            'Error al reactivar',
+            err.error?.message || 'Ocurrió un error inesperado',
+            'error'
+          );
+        },
+      });
   }
 
   eliminarPublicacion() {

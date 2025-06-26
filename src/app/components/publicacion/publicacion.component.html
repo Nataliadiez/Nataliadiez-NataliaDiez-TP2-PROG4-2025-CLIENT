@@ -1,6 +1,11 @@
 <div class="d-flex justify-content-center my-4">
     @if(publicacion()){
     <div class="card publicacion-card">
+        @if (!publicacion()?.estado) {
+        <button class="btn btn-outline-success mt-3" (click)="reactivarPublicacion()">
+            Reactivar publicación
+        </button>
+        }
         @if(this.puedeEditar()){
 
         <div class="dropdown text-end p-1">

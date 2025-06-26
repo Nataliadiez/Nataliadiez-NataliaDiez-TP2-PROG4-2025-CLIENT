@@ -1,0 +1,46 @@
+.filtros-fechas {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.filtros-fechas label {
+  font-weight: bold;
+  color: #fcee0a;
+}
+
+.filtros-fechas input[type="date"] {
+  background-color: #000;
+  color: #00f0ff;
+  border: 1px solid #fcee0a;
+  padding: 0.4rem 0.8rem;
+  font-family: monospace;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #fcee0a;
+  color: #000;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: none;
+  box-shadow: 0 0 10px #fcee0a;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #fcee0a, 0 0 5px #00f0ff;
+  cursor: pointer;
+}
+
+.texto-vacio {
+  text-align: center;
+  color: #ff003c;
+  font-weight: bold;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  font-family: "Share Tech Mono", monospace;
+}

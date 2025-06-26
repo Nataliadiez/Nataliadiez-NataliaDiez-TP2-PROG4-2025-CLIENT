@@ -1,6 +1,6 @@
 <h1 class="text-center title">Panel del admin</h1>
 
-<div class="text-center">
+<div class="m-auto">
     <app-usuarios-dropdown (usuarioSeleccionado)="recibirUsuario($event)"></app-usuarios-dropdown>
     <app-tabla-usuarios [usuarioSeleccionado]="this.usuarioSeleccionado()"></app-tabla-usuarios>
 
@@ -12,7 +12,6 @@
     <app-formulario-registro [usuarioAeditar]="this.usuarioAeditar()"
         [submitFn]="registrarAdmin.bind(this)"></app-formulario-registro>
     }
-
-
+    <app-publicaciones-inactivas [usuario]="this.usuarioSeleccionado()" />
     <app-graficos></app-graficos>
 </div>

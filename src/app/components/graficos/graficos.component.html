@@ -1,1 +1,23 @@
-<p>graficos works!</p>
+<h1>Estadísticas</h1>
+
+<div class="filtros-fechas">
+    <label>Desde:
+        <input type="date" [(ngModel)]="fechaDesde" />
+    </label>
+    <label>Hasta:
+        <input type="date" [(ngModel)]="fechaHasta" />
+    </label>
+    <button (click)="renderizarGraficos()">Mostrar datos</button>
+</div>
+
+<div class="graficos-container">
+    @if(this.publicacionesDataVacia()) {
+    <p class="texto-vacio">No se encontraron publicaciones en ese rango.</p>
+    }
+    <div #chartPublicaciones style="width: 100%; height: 400px;"></div>
+
+    @if(this.comentariosDataVacia()) {
+    <p class="texto-vacio">No se encontraron comentarios en ese rango.</p>
+    }
+    <div #chartComentarios style="width: 100%; height: 400px; margin-top: 2rem;"></div>
+</div>

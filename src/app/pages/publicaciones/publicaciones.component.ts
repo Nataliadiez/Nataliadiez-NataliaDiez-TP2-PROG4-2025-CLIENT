@@ -75,7 +75,11 @@ export class PublicacionesComponent implements OnInit {
     });
 
     this.socketService.onEliminarPublicacion((id) => {
-      this.publicaciones.update((prev) => prev.filter((p) => p._id !== id));
+      const publi = this.publicaciones().find((p) => p._id === id);
+      if (!publi) return;
+      this.publicaciones.set([]);
+      this.pagina.set(0);
+      this.cargarPublicaciones();
     });
 
     this.cargarPublicaciones();

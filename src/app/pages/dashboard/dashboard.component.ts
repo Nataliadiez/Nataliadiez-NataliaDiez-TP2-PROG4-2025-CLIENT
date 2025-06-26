@@ -6,6 +6,9 @@ import { GraficosComponent } from '../../components/graficos/graficos.component'
 import { Usuario } from '../../classes/usuario';
 import { UsuariosService } from '../../services/usuarios.service';
 import { mostrarSwal } from '../../utils/swal.util';
+import { PublicacionesInactivasComponent } from '../../components/publicaciones-inactivas/publicaciones-inactivas.component';
+import { Publicacion } from '../../classes/publicacion';
+import { PublicacionesService } from '../../services/publicaciones.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +17,7 @@ import { mostrarSwal } from '../../utils/swal.util';
     UsuariosDropdownComponent,
     FormularioRegistroComponent,
     GraficosComponent,
+    PublicacionesInactivasComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
@@ -21,12 +25,31 @@ import { mostrarSwal } from '../../utils/swal.util';
 export class DashboardComponent {
   usuarioSeleccionado = signal<Usuario | null>(null);
   usuarioAeditar = signal<Usuario | null>(null);
-  crearUsuario = signal<boolean>(false);
+  crearUsuario = signal<boolean>(true);
+  publicacionesInactivasDelUsuario = signal<Publicacion[]>([]);
 
-  constructor(private usuariosService: UsuariosService) {}
+  constructor(
+    private usuariosService: UsuariosService,
+    private publicacionService: PublicacionesService
+  ) {}
+
   recibirUsuario(usuario: Usuario | null) {
-    if (usuario !== null) {
-      this.usuarioSeleccionado.set(usuario);
+    this.usuarioSeleccionado.set(usuario);
+
+    if (usuario) {
+      this.publicacionService
+        .traerPublicacionesInactivasPorUsuario(usuario._id)
+        .subscribe({
+          next: (res) => this.publicacionesInactivasDelUsuario.set(res),
+          error: (err) =>
+            mostrarSwal(
+              `Error ${err.error.statusCode}`,
+              err.error.message || 'No se pudieron cargar las publicaciones',
+              'error'
+            ),
+        });
+    } else {
+      this.publicacionesInactivasDelUsuario.set([]);
     }
   }
 

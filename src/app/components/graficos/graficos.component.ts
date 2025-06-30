@@ -9,10 +9,11 @@ import * as echarts from 'echarts';
 import { EstadisticasService } from '../../services/estadisticas.service';
 import { FormsModule } from '@angular/forms';
 import { mostrarSwal } from '../../utils/swal.util';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-graficos',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './graficos.component.html',
   styleUrl: './graficos.component.css',
 })
@@ -22,11 +23,15 @@ export class GraficosComponent {
   chartPublicaciones!: ElementRef;
   @ViewChild('chartComentarios', { static: true })
   chartComentarios!: ElementRef;
+  @ViewChild('chartComentariosPorPublicacion', { static: true })
+  chartComentariosPorPublicacion!: ElementRef;
 
   fechaDesde: string = '';
   fechaHasta: string = '';
   publicacionesDataVacia = signal(false);
   comentariosDataVacia = signal(false);
+  comentariosPorPublicacionDataVacia = signal(false);
+  datosComentariosPorPublicacion = signal<any[]>([]);
 
   cargarDatos() {
     if (!this.fechaDesde || !this.fechaHasta) {
@@ -46,7 +51,11 @@ export class GraficosComponent {
       .obtenerPublicacionesPorUsuario(this.fechaDesde, this.fechaHasta)
       .subscribe({
         next: (res) => {
-          this.publicacionesDataVacia.set(res.length === 0);
+          if (!res || res.length === 0) {
+            this.publicacionesDataVacia.set(true);
+            return;
+          }
+          this.publicacionesDataVacia.set(false);
           const chart = echarts.init(
             this.chartPublicaciones.nativeElement,
             'dark'
@@ -74,10 +83,21 @@ export class GraficosComponent {
             backgroundColor: '#000000',
             series: [
               {
-                data: cantidades,
-                type: 'bar',
+                name: 'Publicaciones',
+                type: 'pie',
+                radius: '60%',
+                data: nombres.map((n, i) => ({
+                  name: n,
+                  value: cantidades[i],
+                })),
+                label: {
+                  color: '#fff',
+                  formatter: '{b}: {d}%',
+                },
                 itemStyle: {
-                  color: '#00f0ff',
+                  borderRadius: 5,
+                  borderColor: '#000',
+                  borderWidth: 2,
                 },
               },
             ],
@@ -100,7 +120,11 @@ export class GraficosComponent {
       .obtenercomentariosPorUsuario(this.fechaDesde, this.fechaHasta)
       .subscribe({
         next: (res) => {
-          this.comentariosDataVacia.set(res.length === 0);
+          if (!res || res.length === 0) {
+            this.comentariosDataVacia.set(true);
+            return;
+          }
+          this.comentariosDataVacia.set(false);
           const chart = echarts.init(
             this.chartComentarios.nativeElement,
             'dark'
@@ -128,17 +152,10 @@ export class GraficosComponent {
             series: [
               {
                 data: cantidades,
-                type: 'line', //
-                smooth: true,
-                lineStyle: {
+                type: 'bar',
+                itemStyle: {
                   color: '#00f0ff',
-                  width: 3,
                 },
-                areaStyle: {
-                  color: 'rgba(0, 240, 255, 0.2)',
-                },
-                symbol: 'circle',
-                symbolSize: 6,
               },
             ],
             backgroundColor: '#000000',
@@ -157,8 +174,86 @@ export class GraficosComponent {
       });
   }
 
+  cargarComentariosPorPublicacion() {
+    if (!this.fechaDesde || !this.fechaHasta) {
+      mostrarSwal('', 'Elegí ambas fechas primero', 'warning');
+      return;
+    }
+
+    this.estadisticasService
+      .obtenerComentariosPorPublicacion(this.fechaDesde, this.fechaHasta)
+      .subscribe({
+        next: (res) => {
+          if (!res || res.length === 0) {
+            this.comentariosPorPublicacionDataVacia.set(true);
+            return;
+          }
+          this.comentariosPorPublicacionDataVacia.set(false);
+          const chartElement =
+            this.chartComentariosPorPublicacion?.nativeElement;
+
+          if (!chartElement) {
+            console.warn(
+              'El contenedor del gráfico todavía no está en el DOM.'
+            );
+            return;
+          }
+
+          const chart = echarts.init(chartElement, 'dark');
+
+          const titulos = res.map((item: any) => item.titulo);
+          const cantidades = res.map((item: any) => item.cantidadComentarios);
+
+          const options = {
+            title: {
+              text: 'Comentarios por publicación',
+              left: 'center',
+              textStyle: { color: '#FCEE0A' },
+            },
+            tooltip: { trigger: 'axis' },
+            grid: {
+              bottom: 100,
+            },
+            xAxis: {
+              type: 'value',
+              axisLabel: { color: '#fff' },
+            },
+            yAxis: {
+              type: 'category',
+              data: titulos,
+              axisLabel: {
+                color: '#fff',
+                fontSize: 12,
+                lineHeight: 14,
+              },
+            },
+            series: [
+              {
+                data: cantidades,
+                type: 'bar',
+                itemStyle: {
+                  color: '#ff003c',
+                },
+              },
+            ],
+            backgroundColor: '#000000',
+          };
+
+          chart.setOption(options);
+          window.addEventListener('resize', () => chart.resize());
+        },
+        error: (error) =>
+          mostrarSwal(
+            `Error ${error.error.statusCode}`,
+            error.error.message,
+            'error'
+          ),
+      });
+  }
+
   renderizarGraficos() {
     this.cargarDatos();
     this.cargarComentariosPorFecha();
+    this.cargarComentariosPorPublicacion();
   }
 }

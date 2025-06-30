@@ -1,17 +1,15 @@
-<h1 class="text-center title">Panel del admin</h1>
+<h1 class="text-center title"><i class="fas fa-terminal me-2"></i>Panel del Admin</h1>
 
-<div class="m-auto">
-    <app-usuarios-dropdown (usuarioSeleccionado)="recibirUsuario($event)"></app-usuarios-dropdown>
-    <app-tabla-usuarios [usuarioSeleccionado]="this.usuarioSeleccionado()"></app-tabla-usuarios>
-
-    @if(this.crearUsuario()!){
-    <button class="drop-button" (click)="decidirCrearUnUsuario()">Crear un usuario admin</button>
-
-    }@else {
-    <button class="drop-button" (click)="decidirCrearUnUsuario()">Cerrar formulario</button>
-    <app-formulario-registro [usuarioAeditar]="this.usuarioAeditar()"
-        [submitFn]="registrarAdmin.bind(this)"></app-formulario-registro>
-    }
-    <app-publicaciones-inactivas [usuario]="this.usuarioSeleccionado()" />
-    <app-graficos></app-graficos>
+<div class="botonera">
+    <a routerLink="usuarios" class="boton-dash">
+        <i class="fas fa-users me-2"></i>Usuarios
+    </a>
+    <a routerLink="crear-admin" class="boton-dash">
+        <i class="fas fa-user-shield me-2"></i>Crear Admin
+    </a>
+    <a routerLink="graficos" class="boton-dash">
+        <i class="fas fa-chart-bar me-2"></i>Gráficos
+    </a>
 </div>
+
+<router-outlet />

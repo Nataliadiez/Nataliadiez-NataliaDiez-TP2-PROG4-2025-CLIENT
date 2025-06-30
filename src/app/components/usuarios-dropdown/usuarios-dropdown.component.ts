@@ -17,7 +17,7 @@ export class UsuariosDropdownComponent implements OnInit {
   usuarioActivo: Usuario | null = null;
 
   ngOnInit() {
-    this.usuariosService.traerUsuarios().subscribe({
+    this.usuariosService.traerUsuarios(true).subscribe({
       next: (res) => (this.usuarios = res),
       error: (error) => {
         console.error('Error al traer los usuarios', error);

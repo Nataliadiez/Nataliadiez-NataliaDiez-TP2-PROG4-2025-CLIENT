@@ -11,6 +11,7 @@ import {
 import { mostrarSwal } from '../../utils/swal.util';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { UsuariosService } from '../../services/usuarios.service';
 
 @Component({
   selector: 'app-formulario-registro',
@@ -20,6 +21,8 @@ import { Router } from '@angular/router';
 })
 export class FormularioRegistroComponent implements OnInit {
   usuarioAeditar = input<Usuario | null>();
+  tituloFormulario = input<string>('Registro de usuario');
+  usuariosService = inject(UsuariosService);
   formulario?: FormGroup;
   imagenPerfilFile: File | null = null;
   authService = inject(AuthService);

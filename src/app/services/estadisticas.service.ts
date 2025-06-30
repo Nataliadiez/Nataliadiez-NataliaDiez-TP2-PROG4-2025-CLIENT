@@ -44,4 +44,20 @@ export class EstadisticasService {
       }
     );
   }
+
+  obtenerComentariosPorPublicacion(
+    desde: string,
+    hasta: string
+  ): Observable<any[]> {
+    const params = new HttpParams().set('desde', desde).set('hasta', hasta);
+    return this.http.get<any[]>(
+      `${environment.apiUrl}/estadisticas/comentarios-por-publicacion`,
+      {
+        params,
+        headers: {
+          Authorization: `Bearer ${this.authService.obtenerToken()}`,
+        },
+      }
+    );
+  }
 }

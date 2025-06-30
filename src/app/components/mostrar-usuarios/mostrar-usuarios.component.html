@@ -1,0 +1,8 @@
+<h2 class="text-center title">Gestión de usuarios</h2>
+
+<app-usuarios-dropdown (usuarioSeleccionado)="recibirUsuario($event)"></app-usuarios-dropdown>
+
+<app-tabla-usuarios [usuarioSeleccionado]="this.usuarioSeleccionado()" (editar)="editarUsuario()"
+    (eliminar)="eliminarUsuario()" (reactivar)="reactivarUsuario()" />
+
+<app-publicaciones-inactivas [usuario]="this.usuarioSeleccionado()" />

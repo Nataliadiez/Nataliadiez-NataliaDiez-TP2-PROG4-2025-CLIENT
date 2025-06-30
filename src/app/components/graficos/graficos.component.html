@@ -1,4 +1,4 @@
-<h1>Estadísticas</h1>
+<h1 class="text-center title">Estadísticas</h1>
 
 <div class="filtros-fechas">
     <label>Desde:
@@ -14,10 +14,19 @@
     @if(this.publicacionesDataVacia()) {
     <p class="texto-vacio">No se encontraron publicaciones en ese rango.</p>
     }
-    <div #chartPublicaciones style="width: 100%; height: 400px;"></div>
+    <div #chartPublicaciones style="width: 100%; height: 400px;" [ngClass]="{ 'oculto': publicacionesDataVacia() }">
+    </div>
 
     @if(this.comentariosDataVacia()) {
     <p class="texto-vacio">No se encontraron comentarios en ese rango.</p>
     }
-    <div #chartComentarios style="width: 100%; height: 400px; margin-top: 2rem;"></div>
+    <div #chartComentarios style="width: 100%; height: 400px; margin-top: 2rem;"
+        [ngClass]="{ 'oculto': comentariosDataVacia() }"></div>
+
+    @if(this.comentariosPorPublicacionDataVacia()){
+    <p class="texto-vacio">No se encontraron comentarios en ese rango.</p>
+    }<div #chartComentariosPorPublicacion style="width: 100%; height: 500px;margin-top: 2rem; margin-bottom: 50px;"
+        [ngClass]="{ 'oculto': comentariosPorPublicacionDataVacia() }">
+    </div>
+
 </div>

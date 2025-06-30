@@ -1,11 +1,10 @@
-<h2 class="text-center mb-3 text-light">
+@if (this.publicacionesInactivas().length > 0) {
+<h2 class="text-center mb-3 text-light title">
     Publicaciones inactivas de {{ this.usuario()?.userName }}
 </h2>
-
-@if (this.publicacionesInactivas().length > 0) {
 @for (publi of publicacionesInactivas(); track publi._id) {
 <app-publicacion [publicacion]="publi" (publicacionAreactivar)="onReactivar($event)" />
 }
 } @else {
-<p class="text-muted text-center">Este usuario no tiene publicaciones inactivas.</p>
+<p class="text-center text-light">Este usuario no tiene publicaciones inactivas.</p>
 }

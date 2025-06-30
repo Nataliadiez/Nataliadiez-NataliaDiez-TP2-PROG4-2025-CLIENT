@@ -35,3 +35,14 @@
   color: #ff00cc;
   transition: 0.2s;
 }
+
+.acciones-usuario {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.acciones-usuario button i {
+  margin-right: 5px;
+}

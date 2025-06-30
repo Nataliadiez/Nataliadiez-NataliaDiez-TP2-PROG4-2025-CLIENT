@@ -1,4 +1,4 @@
-@if(usuarioSeleccionado()){
+@if(usuarioSeleccionado()) {
 <table class="table-cyberpunk">
     <tr>
         <th>Nombre</th>
@@ -21,4 +21,16 @@
         <td>{{ usuarioSeleccionado()?.estado ? 'Activo' : 'Inactivo' }}</td>
     </tr>
 </table>
+
+<div class="acciones-usuario text-center">
+    <button class="btn btn-warning me-2" (click)="editarUsuario()">
+        <i class="fas fa-pen-to-square"></i> Editar
+    </button>
+    <button class="btn btn-danger me-2" (click)="eliminarUsuario()">
+        <i class="fas fa-user-slash"></i> Eliminar
+    </button>
+    <button class="btn btn-success" (click)="reactivarUsuario()" [disabled]="usuarioSeleccionado()?.estado">
+        <i class="fas fa-user-check"></i> Reactivar
+    </button>
+</div>
 }

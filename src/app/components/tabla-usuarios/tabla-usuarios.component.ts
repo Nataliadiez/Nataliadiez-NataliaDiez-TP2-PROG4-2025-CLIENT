@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Usuario } from '../../classes/usuario';
 
 @Component({
@@ -9,4 +9,19 @@ import { Usuario } from '../../classes/usuario';
 })
 export class TablaUsuariosComponent {
   usuarioSeleccionado = input<Usuario | null>();
+  editar = output<void>();
+  eliminar = output<void>();
+  reactivar = output<void>();
+
+  editarUsuario() {
+    this.editar.emit();
+  }
+
+  eliminarUsuario() {
+    this.eliminar.emit();
+  }
+
+  reactivarUsuario() {
+    this.reactivar.emit();
+  }
 }

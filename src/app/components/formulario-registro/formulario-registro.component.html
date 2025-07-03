@@ -27,6 +27,15 @@
                 <small class="text-danger">{{ getError(email) }}</small>
             </div>
         </div>
+        @if(this.esAdmin){
+        <div class="mb-3">
+            <label class="form-label">Perfil</label>
+            <select class="form-select" formControlName="perfilControl">
+                <option value="usuario">Usuario</option>
+                <option value="administrador">Administrador</option>
+            </select>
+        </div>
+        }
 
         <div class="row">
             <div class="col-md-6 mb-3">

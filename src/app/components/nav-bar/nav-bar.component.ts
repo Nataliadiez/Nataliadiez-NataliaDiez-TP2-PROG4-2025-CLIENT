@@ -34,26 +34,30 @@ export class NavbarComponent {
   ];
 
   ngOnInit() {
+    // Manejo estado login
     this.authService.usuarioLogueado$.subscribe((estado) => {
       this.estaLogueado.set(estado);
-
       if (estado) {
-        this.miperfilService.obtenerPerfil().subscribe({
-          next: (res) => {
-            this.perfilUsuario.set(res.usuario);
+        this.miperfilService.perfil$.subscribe((perfil) => {
+          if (perfil) {
+            this.perfilUsuario.set(perfil.usuario ?? perfil);
             const isEdgerunner = this.edgerunners.includes(
-              res.usuario.userName
+              (perfil.usuario ?? perfil).userName
             );
             const url = isEdgerunner
               ? 'https://open.spotify.com/embed/track/7mykoq6R3BArsSpNDjFQTm?utm_source=generator&theme=0'
               : 'https://open.spotify.com/embed/playlist/7FlQuycOylGER36uH1TcsD?utm_source=generator&theme=0';
 
             this.listMusic = this.sanitizer.bypassSecurityTrustResourceUrl(url);
-          },
-          error: (err) => {
-            console.error('Error al traer perfil desde navbar', err);
-          },
+            this.edgerunner.set(isEdgerunner);
+          }
         });
+
+        this.miperfilService.refrescarPerfil();
+      } else {
+        this.perfilUsuario.set(null);
+        this.listMusic = '';
+        this.edgerunner.set(false);
       }
     });
 

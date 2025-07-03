@@ -1,9 +1,9 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environments';
 import { AuthService } from './auth.service';
 import { PerfilRespuesta } from '../interfaces/perfilRespuesta';
-import { Observable, ObservableLike } from 'rxjs';
+import { BehaviorSubject, Observable, ObservableLike } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +11,9 @@ import { Observable, ObservableLike } from 'rxjs';
 export class MiperfilService {
   authService = inject(AuthService);
   constructor(private http: HttpClient) {}
+  perfilActual = signal<PerfilRespuesta | null>(null);
+  private perfilSubject = new BehaviorSubject<PerfilRespuesta | null>(null);
+  perfil$ = this.perfilSubject.asObservable();
 
   obtenerPerfil(): Observable<PerfilRespuesta> {
     return this.http.get<PerfilRespuesta>(`${environment.apiUrl}/usuarios/me`, {
@@ -30,5 +33,15 @@ export class MiperfilService {
         },
       }
     );
+  }
+
+  refrescarPerfil() {
+    this.obtenerPerfil().subscribe({
+      next: (res) => {
+        this.perfilActual.set(res.usuario);
+        this.perfilSubject.next(res.usuario);
+      },
+      error: (err) => console.error('Error al refrescar perfil global', err),
+    });
   }
 }

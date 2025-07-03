@@ -18,6 +18,7 @@ export class CrearAdminComponent {
   constructor(private usuariosService: UsuariosService) {}
 
   registrarAdmin(formData: FormData) {
+    formData.append('perfil', 'administrador');
     this.usuariosService.crearUsuarioAdmin(formData).subscribe({
       next: () =>
         mostrarSwal(

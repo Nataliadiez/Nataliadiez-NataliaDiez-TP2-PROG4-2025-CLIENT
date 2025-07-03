@@ -12,10 +12,11 @@ import { mostrarSwal } from '../../utils/swal.util';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../../services/usuarios.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-formulario-registro',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './formulario-registro.component.html',
   styleUrl: './formulario-registro.component.css',
 })
@@ -27,10 +28,12 @@ export class FormularioRegistroComponent implements OnInit {
   imagenPerfilFile: File | null = null;
   authService = inject(AuthService);
   submitFn = input<(formData: FormData) => void>();
+  esAdmin: boolean = false;
 
   constructor(private router: Router) {}
 
   ngOnInit() {
+    this.esAdmin = this.authService.esUsuarioAdmin();
     this.formulario = new FormGroup({
       nombre: new FormControl('', [
         Validators.required,
@@ -65,7 +68,17 @@ export class FormularioRegistroComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(100),
       ]),
+      perfilControl: new FormControl('usuario'),
     });
+
+    if (!this.esAdmin) {
+      this.perfilControl.setValue('usuario');
+      this.perfilControl.disable();
+    }
+  }
+
+  get perfilControl(): FormControl {
+    return this.formulario?.get('perfilControl') as FormControl;
   }
 
   onFileChange(event: any) {
@@ -92,6 +105,10 @@ export class FormularioRegistroComponent implements OnInit {
       formData.append('fechaNacimiento', this.formulario.value.fechaNacimiento),
       formData.append('descripcion', this.formulario.value.descripcion),
       formData.append('imagenPerfil', this.imagenPerfilFile!);
+
+    const perfil = this.esAdmin ? this.perfilControl.value : 'usuario';
+    formData.append('perfil', perfil);
+
     if (this.submitFn()) {
       this.submitFn()!(formData);
       this.limpiarFormulario();
@@ -126,6 +143,10 @@ export class FormularioRegistroComponent implements OnInit {
   }
   get confirmPassword() {
     return this.formulario?.get('confirmPassword');
+  }
+
+  get perfil() {
+    return this.formulario?.get('perfil');
   }
 
   getError(control: AbstractControl | null | undefined): string {

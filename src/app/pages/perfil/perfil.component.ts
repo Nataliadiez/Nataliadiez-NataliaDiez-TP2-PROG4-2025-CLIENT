@@ -92,6 +92,8 @@ export class PerfilComponent implements OnInit {
 
     if (this.imagenPerfilFile) {
       formData.append('imagenPerfil', this.imagenPerfilFile);
+    } else if (this.perfil?.imagenPerfil) {
+      formData.append('imagenActual', this.perfil.imagenPerfil);
     }
 
     this.miperfilService.actualizarPerfil(formData).subscribe({
@@ -99,6 +101,16 @@ export class PerfilComponent implements OnInit {
         mostrarSwal('Listo!', 'Perfil actualizado correctamente', 'success');
         this.modoEdicion.set(false);
         this.perfil = res.usuario;
+
+        this.miperfilService.obtenerPerfil().subscribe({
+          next: (resPerfil) => {
+            this.perfil = resPerfil.usuario;
+            this.publicaciones = resPerfil.publicaciones;
+            this.miperfilService.refrescarPerfil();
+          },
+          error: (err) =>
+            console.error('Error al refrescar perfil tras edición', err),
+        });
       },
       error: (error) => {
         mostrarSwal(

@@ -28,8 +28,7 @@
                 @if(estaLogueado()) {
                 @if(perfilUsuario()) {
                 <div class="d-flex align-items-center me-3 perfil-navBar">
-                    <img [src]="'http://localhost:3000' + perfilUsuario()?.imagenPerfil"
-                        class="perfil-img-navbar me-2" />
+                    <img [src]="this.urlBase + perfilUsuario()?.imagenPerfil" class="perfil-img-navbar me-2" />
                     <span class="user-name-neon">{{ perfilUsuario()?.userName }}</span>
                 </div>
                 }

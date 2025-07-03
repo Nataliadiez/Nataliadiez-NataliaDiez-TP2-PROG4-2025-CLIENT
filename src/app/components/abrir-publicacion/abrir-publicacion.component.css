@@ -4,7 +4,7 @@
   box-shadow: 0 0 15px #ff0033a2;
   border-radius: 1rem;
   width: 100%;
-  max-width: 50vw;
+  max-width: 36vw;
   padding: 10px;
   font-family: "Orbitron", sans-serif;
   transition: transform 0.3s ease;
@@ -96,13 +96,13 @@
 .img-horizontal {
   object-fit: cover;
   width: 100%;
-  max-width: 40vw;
+  max-width: 35vw;
   margin: auto;
 }
 
 .img-vertical {
   object-fit: contain;
-  max-width: 20vw;
+  max-width: 15vw;
   width: 100%;
   margin: auto;
 }
@@ -119,5 +119,12 @@
 @media (max-width: 1400px) {
   .publicacion-card {
     max-width: 100vw;
+  }
+  .img-horizontal {
+    max-width: 80vw;
+  }
+
+  .img-vertical {
+    max-width: 75vw;
   }
 }

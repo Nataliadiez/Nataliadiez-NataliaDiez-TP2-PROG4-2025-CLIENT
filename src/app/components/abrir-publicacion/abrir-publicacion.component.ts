@@ -1,5 +1,5 @@
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PublicacionesService } from '../../services/publicaciones.service';
 import { AuthService } from '../../services/auth.service';
 import { Comentario } from '../../classes/comentario';
@@ -8,6 +8,7 @@ import { SocketService } from '../../services/socket.service';
 import { mostrarSwal, swalConOpciones } from '../../utils/swal.util';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../environments/environments';
 
 @Component({
   selector: 'app-abrir-publicacion',
@@ -30,6 +31,8 @@ export class AbrirPublicacionComponent implements OnInit {
   hayMasComentarios = signal(true);
   usuarioActualId = this.authService.obtenerIdUsuario();
   modoEdicion = signal(false);
+  urlBase = environment.apiUrl;
+
   nuevoComentario = '';
   puedeEditar = computed(() => {
     return (
@@ -37,6 +40,8 @@ export class AbrirPublicacionComponent implements OnInit {
       this.authService.esUsuarioAdmin()
     );
   });
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -188,5 +193,9 @@ export class AbrirPublicacionComponent implements OnInit {
         mostrarSwal('No se eliminó la publicación', '', 'error');
       }
     });
+  }
+
+  volverApublicaciones() {
+    this.router.navigate(['/publicaciones']);
   }
 }

@@ -14,6 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { mostrarSwal } from '../../utils/swal.util';
+import { environment } from '../../../environments/environments';
 
 @Component({
   selector: 'app-perfil',
@@ -30,6 +31,7 @@ export class PerfilComponent implements OnInit {
   publicaciones: Publicacion[] = [];
   modoEdicion = signal<boolean>(false);
   imagenPerfilFile: File | null = null;
+  urlBase = environment.apiUrl;
 
   ngOnInit(): void {
     this.formulario = new FormGroup({

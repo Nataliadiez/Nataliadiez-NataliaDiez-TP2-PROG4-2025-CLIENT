@@ -15,6 +15,7 @@ import { AuthService } from '../../services/auth.service';
 import { PublicacionesService } from '../../services/publicaciones.service';
 import { Publicacion } from '../../classes/publicacion';
 import { mostrarSwal } from '../../utils/swal.util';
+import { environment } from '../../../environments/environments';
 
 @Component({
   selector: 'app-publicacion',
@@ -35,6 +36,7 @@ export class PublicacionComponent implements OnInit {
 
   imagenClase = signal<string>('img-horizontal');
   usuarioActualId = '';
+  urlBase = environment.apiUrl;
 
   ngOnInit() {
     this.usuarioActualId = this.authService.obtenerIdUsuario();

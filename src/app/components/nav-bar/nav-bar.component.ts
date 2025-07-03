@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MiperfilService } from '../../services/miperfil.service';
 import { Perfil } from '../../classes/perfil';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { environment } from '../../../environments/environments';
 
 @Component({
   selector: 'app-navbar',
@@ -17,6 +18,7 @@ export class NavbarComponent {
   miperfilService = inject(MiperfilService);
   router = inject(Router);
   sanitizer = inject(DomSanitizer);
+  urlBase = environment.apiUrl;
 
   estaLogueado = signal<boolean>(false);
   esAdmin = signal<boolean>(false);

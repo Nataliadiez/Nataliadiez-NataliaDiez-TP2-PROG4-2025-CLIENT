@@ -32,7 +32,7 @@
     }@else {
     <div class="perfil-card d-flex mb-5 justify-content-between">
         <div class=" d-flex justify-content-between gap-5">
-            <img [src]="'http://localhost:3000' + perfil?.imagenPerfil" class="perfil-img" />
+            <img [src]="this.urlBase + perfil?.imagenPerfil" class="perfil-img" />
             <div>
                 <h2 class="glitch-titulo">&#64;{{ perfil?.userName }}</h2>
                 <p>{{ perfil?.email }}</p>

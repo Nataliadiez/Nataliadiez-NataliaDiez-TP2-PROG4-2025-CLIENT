@@ -21,6 +21,7 @@ import { Publicacion } from '../../classes/publicacion';
 import { CommonModule } from '@angular/common';
 import { SocketService } from '../../services/socket.service';
 import { RouterLink } from '@angular/router';
+import { environment } from '../../../environments/environments';
 
 @Component({
   selector: 'app-publicaciones',
@@ -55,6 +56,7 @@ export class PublicacionesComponent implements OnInit {
   imagenClase = signal<string>('img-horizontal');
   hayMasPublicaciones = signal(true);
   totalPublicacionesMostradas = signal(0);
+  urlBase = environment.apiUrl;
 
   chequearScroll = () => {
     const scrollY = window.scrollY || document.documentElement.scrollTop;

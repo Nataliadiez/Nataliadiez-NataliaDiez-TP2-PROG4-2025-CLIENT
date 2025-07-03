@@ -8,13 +8,13 @@
         }
 
         <div class="card-header d-flex align-items-center gap-2">
-            <img [src]="'http://localhost:3000' + (publicacion()?.autor?.imagenPerfil || '')" alt="Foto de perfil"
+            <img [src]="this.urlBase + (publicacion()?.autor?.imagenPerfil || '')" alt="Foto de perfil"
                 class="rounded-circle perfil-img" />
             <strong class="text-light">&#64;{{ publicacion()?.autor?.userName }}</strong>
         </div>
 
         @if (publicacion()?.imagen) {
-        <img [src]="'http://localhost:3000' + publicacion()?.imagen" [ngClass]="imagenClase()" alt="Imagen publicación"
+        <img [src]="this.urlBase + publicacion()?.imagen" [ngClass]="imagenClase()" alt="Imagen publicación"
             class="img-thumbnail" />
         }
 

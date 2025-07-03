@@ -26,7 +26,7 @@
 
 
         @if (publicacion()?.imagen) {
-        <img [src]="'http://localhost:3000' + publicacion()?.imagen" class="img-thumbnail" [ngClass]="imagenClase()" />
+        <img [src]="this.urlBase + publicacion()?.imagen" class="img-thumbnail" [ngClass]="imagenClase()" />
         }
 
         <div class="card-body">

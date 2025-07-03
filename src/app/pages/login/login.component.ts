@@ -85,8 +85,8 @@ export class LoginComponent implements OnInit {
 
   inicioRapido() {
     this.formulario?.patchValue({
-      identificador: 'Natt10',
-      password: 'Natt2025',
+      identificador: 'soulK1ller',
+      password: 'NetrAlt1',
     });
 
     this.enviarFormulario();

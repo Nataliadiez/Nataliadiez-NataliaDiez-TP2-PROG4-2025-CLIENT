@@ -1,0 +1,71 @@
+<div class="container text-light d-flex justify-content-center my-4">
+    @if(publicacion()){
+    <div class="card publicacion-card">
+        <div class="card-header d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-2">
+                <img [src]="'http://localhost:3000' + publicacion()?.autor?.imagenPerfil" alt="Foto de perfil"
+                    class="rounded-circle perfil-img" />
+
+                <strong class="text-light">&#64;{{ publicacion()?.autor?.userName }}</strong>
+            </div>
+
+            @if (puedeEditar()) {
+            <div class="dropdown text-end p-1">
+                <i class="fa-solid fa-ellipsis icon-edit" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" (click)="activarEdicion()">Editar</a></li>
+                    <li><a class="dropdown-item" (click)="eliminarPublicacion()">Eliminar</a></li>
+                </ul>
+            </div>
+            }
+        </div>
+
+
+        @if (publicacion()?.imagen) {
+        <img [src]="'http://localhost:3000' + publicacion()?.imagen" class="img-thumbnail" [ngClass]="imagenClase()" />
+        }
+
+        <div class="card-body">
+            <div class="d-flex align-items-center mb-2">
+                <button class="btn btn-link p-0 me-2" (click)="toggleLike()">
+                    <i class="fa-solid fa-microchip icon"
+                        [class.text-danger]="publicacion()?.likes?.includes(usuarioActualId)"
+                        [class.text-secondary]="!publicacion()?.likes?.includes(usuarioActualId)">
+                    </i>
+                </button>
+                <span class="likes">{{ publicacion()?.likes?.length }} me gusta</span>
+            </div>
+
+            @if (modoEdicion()) {
+            <input type="text" class="form-control mb-2" [(ngModel)]="publicacion()!.titulo" />
+            <textarea class="form-control" rows="3" [(ngModel)]="publicacion()!.mensaje"></textarea>
+            <div class="mt-2">
+                <button class="btn btn-success me-2" (click)="guardarCambios()">Guardar</button>
+                <button class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
+            </div>
+            } @else {
+            <p class="glitch-titulo">{{ publicacion()?.titulo }}</p>
+            <p class="card-text text-light mb-2">{{ publicacion()?.mensaje }}</p>
+            }
+
+            <h5 class="mt-4 comentarios-title">Comentarios:</h5>
+            @for (comentario of comentarios(); track $index) {
+            <p class="mb-1 text-light">
+                <strong>{{ comentario.usuario.userName }}</strong> {{ comentario.contenido }}
+            </p>
+            }
+
+            @if(hayMasComentarios()) {
+            <button class="btn btn-sm btn-outline-secondary mt-2" (click)="cargarComentarios(publicacion()?._id || '')">
+                Ver más comentarios
+            </button>
+            }
+
+            <div class="comentario-input mt-3">
+                <input type="text" class="input-comentario w-100" [(ngModel)]="nuevoComentario"
+                    placeholder="Agregá un comentario" (keyup.enter)="enviarComentario()" />
+            </div>
+        </div>
+    </div>
+    }
+</div>

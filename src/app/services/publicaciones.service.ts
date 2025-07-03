@@ -1,6 +1,6 @@
 import { environment } from './../../environments/environments';
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 
@@ -106,13 +106,22 @@ export class PublicacionesService {
     skip: number,
     limit: number
   ): Observable<any> {
-    return this.http.get(
-      `${this.apiUrl}/${publicacionId}/comentarios?skip=${skip}&limit=${limit}`,
-      {
-        headers: {
-          Authorization: `Bearer ${this.authService.obtenerToken()}`,
-        },
-      }
-    );
+    const params = new HttpParams()
+      .set('skip', skip.toString())
+      .set('limit', limit.toString());
+    return this.http.get(`${this.apiUrl}/${publicacionId}/comentarios`, {
+      params,
+      headers: {
+        Authorization: `Bearer ${this.authService.obtenerToken()}`,
+      },
+    });
+  }
+
+  traerPublicacionPorId(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`, {
+      headers: {
+        Authorization: `Bearer ${this.authService.obtenerToken()}`,
+      },
+    });
   }
 }

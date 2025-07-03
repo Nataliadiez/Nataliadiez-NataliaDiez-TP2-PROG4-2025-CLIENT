@@ -46,7 +46,7 @@ export class PerfilComponent implements OnInit {
       descripcion: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(100),
+        Validators.maxLength(300),
       ]),
     });
     this.miperfilService.obtenerPerfil().subscribe({

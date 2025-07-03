@@ -1,8 +1,7 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/nav-bar/nav-bar.component';
-import { jwtDecode } from 'jwt-decode';
 import { AuthService } from './services/auth.service';
 
 @Component({

@@ -87,17 +87,22 @@
 
 
     @for(publicacion of this.publicaciones(); track $index){
-    <app-publicacion [publicacion]="publicacion" (publicacionAeditar)="editarPublicacion($event)">
-    </app-publicacion>
+    <a [routerLink]="['/abrirPublicacion', publicacion._id]" class="text-decoration-none text-reset">
+        <app-publicacion [publicacion]="publicacion">
+        </app-publicacion>
+    </a>
     }
     }
-    @if(this.publicaciones().length > this.tamanoPagina){
+    @if(this.hayMasPublicaciones()) {
     <div class="text-center mt-4">
         <button class="btn btn-outline-light" (click)="cargarPublicaciones()" [disabled]="cargando()">
             Cargar más
         </button>
     </div>
-    }@if(this.publicaciones().length === 0) {
+    } @else {
+    <p class="text-center text-muted">No quedan publicaciones para cargar.</p>
+    }
+    @if(this.publicaciones().length === 0) {
     <h1 class="text-center m-5 title">Actualmente no hay publicaciones</h1>
     }
 

@@ -1,4 +1,11 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  NgZone,
+  Component,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { PublicacionComponent } from '../../components/publicacion/publicacion.component';
 import { PublicacionesService } from '../../services/publicaciones.service';
 import {
@@ -13,6 +20,7 @@ import { mostrarSwal } from '../../utils/swal.util';
 import { Publicacion } from '../../classes/publicacion';
 import { CommonModule } from '@angular/common';
 import { SocketService } from '../../services/socket.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-publicaciones',
@@ -21,6 +29,7 @@ import { SocketService } from '../../services/socket.service';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    RouterLink,
   ],
   templateUrl: './publicaciones.component.html',
   styleUrl: './publicaciones.component.css',
@@ -44,6 +53,8 @@ export class PublicacionesComponent implements OnInit {
   mostrarBotonArriba = signal<boolean>(false);
   imagenPreview = signal<string | null>(null);
   imagenClase = signal<string>('img-horizontal');
+  hayMasPublicaciones = signal(true);
+  totalPublicacionesMostradas = signal(0);
 
   chequearScroll = () => {
     const scrollY = window.scrollY || document.documentElement.scrollTop;
@@ -58,7 +69,7 @@ export class PublicacionesComponent implements OnInit {
       ]),
       mensaje: new FormControl('', [
         Validators.required,
-        Validators.maxLength(150),
+        Validators.maxLength(300),
       ]),
     });
 
@@ -188,6 +199,7 @@ export class PublicacionesComponent implements OnInit {
   }
 
   cargarPublicaciones() {
+    if (this.cargando()) return;
     this.cargando.set(true);
     const skip = this.pagina() * this.tamanoPagina;
 
@@ -199,13 +211,19 @@ export class PublicacionesComponent implements OnInit {
         this.usuarioSeleccionado()
       )
       .subscribe({
-        next: (nuevas) => {
+        next: ({ nuevas, hasMore }) => {
           const anteriores = this.publicaciones();
           const nuevasSinDuplicados = nuevas.filter(
             (publi: any) => !anteriores.some((p: any) => p._id === publi._id)
           );
           this.publicaciones.set([...anteriores, ...nuevasSinDuplicados]);
-          this.pagina.update((v) => v + 1);
+
+          if (!hasMore) {
+            this.hayMasPublicaciones.set(false);
+          } else {
+            this.pagina.update((v) => v + 1);
+          }
+
           this.cargando.set(false);
         },
         error: (err) => {
@@ -219,6 +237,7 @@ export class PublicacionesComponent implements OnInit {
     this.ordenActual.set('likes');
     this.pagina.set(0);
     this.publicaciones.set([]);
+    this.hayMasPublicaciones.set(true);
     this.cargarPublicaciones();
   }
 
@@ -226,6 +245,7 @@ export class PublicacionesComponent implements OnInit {
     this.ordenActual.set('createdAt');
     this.pagina.set(0);
     this.publicaciones.set([]);
+    this.hayMasPublicaciones.set(true);
     this.cargarPublicaciones();
   }
 
@@ -251,6 +271,7 @@ export class PublicacionesComponent implements OnInit {
   filtrarPorUsuario(autorId: string) {
     this.usuarioSeleccionado.set(autorId);
     this.publicaciones.set([]);
+    this.hayMasPublicaciones.set(true);
     this.pagina.set(0);
     this.cargarPublicaciones();
   }
@@ -262,6 +283,7 @@ export class PublicacionesComponent implements OnInit {
   quitarFiltroUsuario() {
     this.usuarioSeleccionado.set(null);
     this.publicaciones.set([]);
+    this.hayMasPublicaciones.set(true);
     this.pagina.set(0);
     this.cargarPublicaciones();
   }

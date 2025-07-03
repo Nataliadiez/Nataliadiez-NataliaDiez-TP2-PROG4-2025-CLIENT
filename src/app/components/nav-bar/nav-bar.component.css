@@ -1,24 +1,45 @@
+/* --- GENERAL NAVBAR --- */
 .custom-navbar {
-  background-color: #0a0a0f;
-  border-bottom: 1px solid #ff1a1a;
+  background-color: #0e0e0e;
+  border-bottom: 2px solid #ff004c;
   box-shadow: 0 0 10px #ff0033;
   font-family: "Orbitron", sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
+
 a {
   cursor: pointer;
 }
 
+.navbar {
+  margin-bottom: 50px;
+}
+
 .navbar-brand {
-  font-family: "Orbitron", sans-serif;
   font-size: 1.5rem;
   letter-spacing: 2px;
+  font-family: "Orbitron", sans-serif;
+}
+
+.navbar-logo {
+  height: 40px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* --- TEXTO Y ENLACES --- */
+.glitch-text {
+  text-shadow: 0 0 2px #ff1a1a, 0 0 10px #ff0033, 0 0 20px #ff0033;
 }
 
 .navbar-nav .nav-link {
   position: relative;
   margin-left: 1.5rem;
   font-weight: 500;
-  transition: color 0.3s ease-in-out;
+  color: #eee;
+  transition: all 0.3s ease;
 }
 
 .navbar-nav .nav-link::after {
@@ -34,29 +55,109 @@ a {
 }
 
 .navbar-nav .nav-link:hover {
-  color: #ff1a1a;
+  color: #ff004c;
+  text-shadow: 0 0 5px #ff004c;
 }
 
 .navbar-nav .nav-link:hover::after {
   width: 100%;
 }
 
-.glitch-text {
-  text-shadow: 0 0 2px #ff1a1a, 0 0 10px #ff0033, 0 0 20px #ff0033;
+/* --- HAMBURGUESA --- */
+.navbar-toggler {
+  border: none;
+  outline: none;
 }
 
-.custom-navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg fill='%23ff004c' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='%23ff004c' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
-.navbar-logo {
-  height: 40px;
-  margin-left: 8px;
-  vertical-align: middle;
+/* --- PERFIL --- */
+.perfil-img-navbar {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
-.navbar {
-  margin-bottom: 50px;
+.user-name-neon {
+  color: #00fff7;
+  font-weight: bold;
+  text-shadow: 0 0 5px #00fff7, 0 0 10px #00fff7;
+}
+
+.perfil-navBar {
+  flex-direction: column;
+}
+
+/* --- CERRAR SESIÓN --- */
+.cerrar-sesion-icon {
+  font-size: 1.5rem;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.cerrar-sesion-icon:hover {
+  color: #ff004c;
+  transform: translateX(5px);
+  cursor: pointer;
+}
+
+/* --- SPOTIFY (Desktop) --- */
+.spotify-wrapper {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spotify-wrapper iframe {
+  width: 350px;
+  height: 80px;
+  border-radius: 12px;
+}
+
+/* --- RESPONSIVE AJUSTES DESDE 1271px --- */
+@media (max-width: 1200px) {
+  .navbar-expand-lg {
+    flex-wrap: wrap;
+  }
+
+  .perfil-navBar {
+    flex-direction: row;
+  }
+
+  .navbar-nav,
+  .custom-navbar,
+  .navbar {
+    width: 100% !important;
+  }
+
+  .spotify-wrapper {
+    display: none;
+  }
+
+  .spotify-menu-wrapper {
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+    display: block;
+  }
+
+  .spotify-menu-wrapper iframe {
+    width: 100%;
+    max-width: 100%;
+    height: 152px;
+    border-radius: 12px;
+  }
+}
+
+/* Por defecto oculto en desktop */
+.spotify-menu-wrapper {
+  display: none;
+}
+@media (max-width: 1300px) {
+  .spotify-menu-wrapper {
+    display: block;
+  }
 }

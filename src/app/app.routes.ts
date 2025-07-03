@@ -29,6 +29,14 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'abrirPublicacion/:id',
+    canActivate: [AuthGuard],
+    loadComponent: () =>
+      import('./components/abrir-publicacion/abrir-publicacion.component').then(
+        (m) => m.AbrirPublicacionComponent
+      ),
+  },
+  {
     path: 'perfil',
     canActivate: [AuthGuard],
     loadComponent: () =>
